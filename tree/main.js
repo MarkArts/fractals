@@ -12,14 +12,11 @@ var controls = new THREE.OrbitControls( camera, renderer.domElement );
 // smooth my curve over this many points
 var numPoints = 20;
 
-function createLine(x, y, length, zrad, mirror)
+function createLine(x, y, z, length, zrad, xrad)
 {
-
-  var curvePoint = (mirror) ? length/8 : -length/8;
-
   var points = [
     new THREE.Vector3(0, 0, 0),
-    new THREE.Vector3(curvePoint, length*0.75, 0),
+    new THREE.Vector3(length/8, length*0.75, 0),
     new THREE.Vector3(0, length, 0),
   ];
 
@@ -40,10 +37,12 @@ function createLine(x, y, length, zrad, mirror)
 
   line.position.x = x;
   line.position.y = y;
-  line.rotation.z = zrad;
+  line.position.z = z;
 
-  // i am way to lazy right now to program this properly
-  // lines should probaply be created from a array with minimum representation of the lines
+  line.rotateZ(zrad);
+  line.rotateX(xrad);
+
+  // This is porabply not the proper way to store the length of the Line
   line.length = length;
 
   return line;
@@ -52,22 +51,22 @@ function createLine(x, y, length, zrad, mirror)
 function splitLine(line){
   var lines = [];
 
-  console.log(line.rotation.z * (180/Math.PI));
+  var vector = new THREE.Vector3(0, line.length, 0);
+  vector.applyAxisAngle(new THREE.Vector3(0, 0, 1), line.rotation.z);
+  vector.applyAxisAngle(new THREE.Vector3(1, 0, 0), line.rotation.x);
+  
+  var endPoint = vector.add(line.position);
 
-  var sidea = Math.sin(line.rotation.z) * line.length
-  var sideb = Math.cos(line.rotation.z) * line.length
+  console.log(endPoint);
 
-  var endX = line.position.x - sidea;
-  var endY = line.position.y + sideb;
-
-  lines.push(createLine(endX, endY, line.length/1.3, line.rotation.z - 45 * (Math.PI/180)));
-  lines.push(createLine(endX, endY, line.length/1.3, line.rotation.z + 45 * (Math.PI/180)));
+  lines.push(createLine(endPoint.x, endPoint.y, endPoint.z, line.length/1.3, line.rotation.z - 45 * (Math.PI/180),  line.rotation.x - 45 * (Math.PI/180))) //line.rotation.y - 45 * (Math.PI/180)));
+  lines.push(createLine(endPoint.x, endPoint.y, endPoint.z, line.length/1.3, line.rotation.z + 45 * (Math.PI/180),  line.rotation.x + 45 * (Math.PI/180))) //line.rotation.y + 45 * (Math.PI/180)));
 
   return lines;
 }
 
 function splitRec(line, times){
-  if(times == 0){
+  if(times <= 0){
     return [line];
   }
 
@@ -78,8 +77,9 @@ function splitRec(line, times){
 
 
 
-var line = createLine(0,-10,5, 0,false);
-var lines = splitRec(line, 10);
+var line = createLine(0, -10, 0,  5, 0, 0);
+var lines = splitRec(line, 11);
+
 
 lines.map( l => scene.add(l));
 
