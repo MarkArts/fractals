@@ -16,3 +16,7 @@ function url(){
    		return k+"="+options[k]+";"+acc;
 	}, "");
 }
+
+function cameraHash(){
+	return "#"+"cameraX="+camera.position.x+";"+"cameraY="+camera.position.y+";"+"cameraZ="+camera.position.z+";";
+}
