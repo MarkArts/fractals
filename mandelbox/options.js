@@ -4,7 +4,7 @@ function setOptionsFromHash(options){
 		key=x.split('=')[0];
 		val=x.split('=')[1];
 		if(key in options){
-			options[key] = val;
+			options[key] = parseInt(val);
 		}
 	})
 }

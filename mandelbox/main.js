@@ -5,7 +5,7 @@ var options = {
   scale: -1.25,  // zooms in or out (doesn't scale  the quality settings like depth/escape/detail)
   escape: 0.2, // how deep should we search the complex
   depth: 5, // how many itteratins should we run before givving up
-  detail: 300, // this to the power of three are the amount of cubes calculated
+  detail: 200, // this to the power of three are the amount of cubes calculated
 
   // StartCamera position
   cameraX: 2,
@@ -19,6 +19,9 @@ var options = {
   boxSize: 10,  
 };
 
+
+console.log(options);
+
 setOptionsFromHash(options);
 
 
@@ -30,14 +33,13 @@ camera.position.y = options.cameraY;
 camera.position.z = options.cameraZ;
 
 var renderer = new THREE.WebGLRenderer();
+var controls = new THREE.OrbitControls( camera, renderer.domElement );
 renderer.setSize( window.innerWidth, window.innerHeight );
 document.body.appendChild( renderer.domElement );
 
-var controls = new THREE.OrbitControls( camera, renderer.domElement );
-
 // mandelbox constants
-var FIXEDRADIUS = options.fixedradius;
-var MINRADIUS	= options.minradius;
+var FIXEDRADIUS = 1; //options.fixedradius;
+var MINRADIUS	= 0.5; //options.minradius;
 var RADIUSRATIO = Math.sqrt(FIXEDRADIUS) / Math.sqrt(MINRADIUS);
 
 //Mandelbox paraneters
@@ -60,6 +62,7 @@ window.setTimeout(function(){
     document.getElementById("rendering").style.display = 'none';
 
     var mesh = time(function(){ return createMesh(blocks); }, 'createMesh');
+
     scene.add(mesh);
     render();
   },0);
