@@ -38,8 +38,8 @@ renderer.setSize( window.innerWidth, window.innerHeight );
 document.body.appendChild( renderer.domElement );
 
 // mandelbox constants
-var FIXEDRADIUS = 1; //options.fixedradius;
-var MINRADIUS	= 0.5; //options.minradius;
+var FIXEDRADIUS = options.fixedradius;
+var MINRADIUS	= options.minradius;
 var RADIUSRATIO = Math.sqrt(FIXEDRADIUS) / Math.sqrt(MINRADIUS);
 
 //Mandelbox paraneters
