@@ -1,7 +1,6 @@
 function createMesh(blocks) {
   var vertices = [];
   var colors = [];
-  this.blockSize = 1;
   
   if(blocks == null) {
     return;
@@ -12,65 +11,65 @@ function createMesh(blocks) {
   var v = new THREE.BufferAttribute( new Float32Array( blocks.length * 6*6*3), 3 );  
   var vi = 0;
   for(var i = 0; i < blocks.length; i++) {
-      var pos = blocks[i]
+      var block = blocks[i]
 
-      var hasbottom = i+1 != blocks.length ? blocks[i+1].x == pos.x+BLOCKSIZE : false;
+      var hasbottom = i+1 != blocks.length ? blocks[i+1].x == block.x+block.size : false;
 
 	    //botom      
-      v.setXYZ(vi, pos.x+BLOCKSIZE, pos.y+BLOCKSIZE-BLOCKSIZE, pos.z+BLOCKSIZE); vi++;
-      v.setXYZ(vi, pos.x+BLOCKSIZE-BLOCKSIZE, pos.y+BLOCKSIZE-BLOCKSIZE, pos.z+BLOCKSIZE); vi++;
-      v.setXYZ(vi, pos.x+BLOCKSIZE-BLOCKSIZE, pos.y+BLOCKSIZE-BLOCKSIZE, pos.z+BLOCKSIZE-BLOCKSIZE); vi++;
+      v.setXYZ(vi, block.x+block.size, block.y+block.size-block.size, block.z+block.size); vi++;
+      v.setXYZ(vi, block.x+block.size-block.size, block.y+block.size-block.size, block.z+block.size); vi++;
+      v.setXYZ(vi, block.x+block.size-block.size, block.y+block.size-block.size, block.z+block.size-block.size); vi++;
     
-      v.setXYZ(vi, pos.x+BLOCKSIZE, pos.y+BLOCKSIZE-BLOCKSIZE, pos.z+BLOCKSIZE); vi++;
-      v.setXYZ(vi, pos.x+BLOCKSIZE-BLOCKSIZE, pos.y+BLOCKSIZE-BLOCKSIZE, pos.z+BLOCKSIZE-BLOCKSIZE); vi++;
-      v.setXYZ(vi, pos.x+BLOCKSIZE, pos.y+BLOCKSIZE-BLOCKSIZE, pos.z+BLOCKSIZE-BLOCKSIZE); vi++;
+      v.setXYZ(vi, block.x+block.size, block.y+block.size-block.size, block.z+block.size); vi++;
+      v.setXYZ(vi, block.x+block.size-block.size, block.y+block.size-block.size, block.z+block.size-block.size); vi++;
+      v.setXYZ(vi, block.x+block.size, block.y+block.size-block.size, block.z+block.size-block.size); vi++;
     
       // top
-      v.setXYZ(vi, pos.x+BLOCKSIZE, pos.y+BLOCKSIZE, pos.z+BLOCKSIZE); vi++;
-      v.setXYZ(vi, pos.x+BLOCKSIZE-BLOCKSIZE, pos.y+BLOCKSIZE, pos.z+BLOCKSIZE-BLOCKSIZE); vi++;
-      v.setXYZ(vi, pos.x+BLOCKSIZE-BLOCKSIZE, pos.y+BLOCKSIZE, pos.z+BLOCKSIZE); vi++;
+      v.setXYZ(vi, block.x+block.size, block.y+block.size, block.z+block.size); vi++;
+      v.setXYZ(vi, block.x+block.size-block.size, block.y+block.size, block.z+block.size-block.size); vi++;
+      v.setXYZ(vi, block.x+block.size-block.size, block.y+block.size, block.z+block.size); vi++;
     
-      v.setXYZ(vi, pos.x+BLOCKSIZE, pos.y+BLOCKSIZE, pos.z+BLOCKSIZE); vi++;
-      v.setXYZ(vi, pos.x+BLOCKSIZE, pos.y+BLOCKSIZE, pos.z+BLOCKSIZE-BLOCKSIZE); vi++;
-      v.setXYZ(vi, pos.x+BLOCKSIZE-BLOCKSIZE, pos.y+BLOCKSIZE, pos.z+BLOCKSIZE-BLOCKSIZE); vi++;
+      v.setXYZ(vi, block.x+block.size, block.y+block.size, block.z+block.size); vi++;
+      v.setXYZ(vi, block.x+block.size, block.y+block.size, block.z+block.size-block.size); vi++;
+      v.setXYZ(vi, block.x+block.size-block.size, block.y+block.size, block.z+block.size-block.size); vi++;
 
       // // front
-      v.setXYZ(vi, pos.x+BLOCKSIZE, pos.y+BLOCKSIZE, pos.z+BLOCKSIZE); vi++;
-      v.setXYZ(vi, pos.x+BLOCKSIZE-BLOCKSIZE, pos.y+BLOCKSIZE, pos.z+BLOCKSIZE); vi++;
-      v.setXYZ(vi, pos.x+BLOCKSIZE, pos.y+BLOCKSIZE-BLOCKSIZE, pos.z+BLOCKSIZE); vi++;
+      v.setXYZ(vi, block.x+block.size, block.y+block.size, block.z+block.size); vi++;
+      v.setXYZ(vi, block.x+block.size-block.size, block.y+block.size, block.z+block.size); vi++;
+      v.setXYZ(vi, block.x+block.size, block.y+block.size-block.size, block.z+block.size); vi++;
     
-      v.setXYZ(vi, pos.x+BLOCKSIZE-BLOCKSIZE, pos.y+BLOCKSIZE, pos.z+BLOCKSIZE); vi++;
-      v.setXYZ(vi, pos.x+BLOCKSIZE-BLOCKSIZE, pos.y+BLOCKSIZE-BLOCKSIZE, pos.z+BLOCKSIZE); vi++;
-      v.setXYZ(vi, pos.x+BLOCKSIZE, pos.y+BLOCKSIZE-BLOCKSIZE, pos.z+BLOCKSIZE); vi++;
+      v.setXYZ(vi, block.x+block.size-block.size, block.y+block.size, block.z+block.size); vi++;
+      v.setXYZ(vi, block.x+block.size-block.size, block.y+block.size-block.size, block.z+block.size); vi++;
+      v.setXYZ(vi, block.x+block.size, block.y+block.size-block.size, block.z+block.size); vi++;
     
       // // back
-      v.setXYZ(vi, pos.x+BLOCKSIZE, pos.y+BLOCKSIZE, pos.z+BLOCKSIZE-BLOCKSIZE); vi++;
-      v.setXYZ(vi, pos.x+BLOCKSIZE, pos.y+BLOCKSIZE-BLOCKSIZE, pos.z+BLOCKSIZE-BLOCKSIZE); vi++;
-      v.setXYZ(vi, pos.x+BLOCKSIZE-BLOCKSIZE, pos.y+BLOCKSIZE-BLOCKSIZE, pos.z+BLOCKSIZE-BLOCKSIZE); vi++;
+      v.setXYZ(vi, block.x+block.size, block.y+block.size, block.z+block.size-block.size); vi++;
+      v.setXYZ(vi, block.x+block.size, block.y+block.size-block.size, block.z+block.size-block.size); vi++;
+      v.setXYZ(vi, block.x+block.size-block.size, block.y+block.size-block.size, block.z+block.size-block.size); vi++;
     
-      v.setXYZ(vi, pos.x+BLOCKSIZE, pos.y+BLOCKSIZE, pos.z+BLOCKSIZE-BLOCKSIZE); vi++;
-      v.setXYZ(vi, pos.x+BLOCKSIZE-BLOCKSIZE, pos.y+BLOCKSIZE-BLOCKSIZE, pos.z+BLOCKSIZE-BLOCKSIZE); vi++;
-      v.setXYZ(vi, pos.x+BLOCKSIZE-BLOCKSIZE, pos.y+BLOCKSIZE, pos.z+BLOCKSIZE-BLOCKSIZE); vi++;
+      v.setXYZ(vi, block.x+block.size, block.y+block.size, block.z+block.size-block.size); vi++;
+      v.setXYZ(vi, block.x+block.size-block.size, block.y+block.size-block.size, block.z+block.size-block.size); vi++;
+      v.setXYZ(vi, block.x+block.size-block.size, block.y+block.size, block.z+block.size-block.size); vi++;
     
 
       // // left
-      v.setXYZ(vi, pos.x+BLOCKSIZE-BLOCKSIZE, pos.y+BLOCKSIZE-BLOCKSIZE, pos.z+BLOCKSIZE-BLOCKSIZE); vi++;
-      v.setXYZ(vi, pos.x+BLOCKSIZE-BLOCKSIZE, pos.y+BLOCKSIZE-BLOCKSIZE, pos.z+BLOCKSIZE); vi++;
-      v.setXYZ(vi, pos.x+BLOCKSIZE-BLOCKSIZE, pos.y+BLOCKSIZE, pos.z+BLOCKSIZE); vi++;
+      v.setXYZ(vi, block.x+block.size-block.size, block.y+block.size-block.size, block.z+block.size-block.size); vi++;
+      v.setXYZ(vi, block.x+block.size-block.size, block.y+block.size-block.size, block.z+block.size); vi++;
+      v.setXYZ(vi, block.x+block.size-block.size, block.y+block.size, block.z+block.size); vi++;
     
-      v.setXYZ(vi, pos.x+BLOCKSIZE-BLOCKSIZE, pos.y+BLOCKSIZE-BLOCKSIZE, pos.z+BLOCKSIZE-BLOCKSIZE); vi++;
-      v.setXYZ(vi, pos.x+BLOCKSIZE-BLOCKSIZE, pos.y+BLOCKSIZE, pos.z+BLOCKSIZE); vi++;
-      v.setXYZ(vi, pos.x+BLOCKSIZE-BLOCKSIZE, pos.y+BLOCKSIZE, pos.z+BLOCKSIZE-BLOCKSIZE); vi++;
+      v.setXYZ(vi, block.x+block.size-block.size, block.y+block.size-block.size, block.z+block.size-block.size); vi++;
+      v.setXYZ(vi, block.x+block.size-block.size, block.y+block.size, block.z+block.size); vi++;
+      v.setXYZ(vi, block.x+block.size-block.size, block.y+block.size, block.z+block.size-block.size); vi++;
     
 
       // // right
-      v.setXYZ(vi, pos.x+BLOCKSIZE, pos.y+BLOCKSIZE-BLOCKSIZE, pos.z+BLOCKSIZE-BLOCKSIZE); vi++;
-      v.setXYZ(vi, pos.x+BLOCKSIZE, pos.y+BLOCKSIZE, pos.z+BLOCKSIZE); vi++;
-      v.setXYZ(vi, pos.x+BLOCKSIZE, pos.y+BLOCKSIZE-BLOCKSIZE, pos.z+BLOCKSIZE); vi++;
+      v.setXYZ(vi, block.x+block.size, block.y+block.size-block.size, block.z+block.size-block.size); vi++;
+      v.setXYZ(vi, block.x+block.size, block.y+block.size, block.z+block.size); vi++;
+      v.setXYZ(vi, block.x+block.size, block.y+block.size-block.size, block.z+block.size); vi++;
     
-      v.setXYZ(vi, pos.x+BLOCKSIZE, pos.y+BLOCKSIZE, pos.z+BLOCKSIZE); vi++;
-      v.setXYZ(vi, pos.x+BLOCKSIZE, pos.y+BLOCKSIZE-BLOCKSIZE, pos.z+BLOCKSIZE-BLOCKSIZE); vi++;
-      v.setXYZ(vi, pos.x+BLOCKSIZE, pos.y+BLOCKSIZE, pos.z+BLOCKSIZE-BLOCKSIZE); vi++;
+      v.setXYZ(vi, block.x+block.size, block.y+block.size, block.z+block.size); vi++;
+      v.setXYZ(vi, block.x+block.size, block.y+block.size-block.size, block.z+block.size-block.size); vi++;
+      v.setXYZ(vi, block.x+block.size, block.y+block.size, block.z+block.size-block.size); vi++;
     
   }
 

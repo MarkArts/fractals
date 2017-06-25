@@ -17,6 +17,7 @@ var options = {
   boxY: 0,
   boxZ: 0,
   boxSize: 10,  
+  itts: 2
 };
 
 
@@ -40,6 +41,7 @@ document.body.appendChild( renderer.domElement );
 // mandelbox constants
 var FIXEDRADIUS = options.fixedradius;
 var MINRADIUS	= options.minradius;
+console.log(MINRADIUS);
 var RADIUSRATIO = Math.sqrt(FIXEDRADIUS) / Math.sqrt(MINRADIUS);
 
 //Mandelbox paraneters
@@ -50,14 +52,12 @@ var DEPTH = options.depth; // how many itteratins should we run before givving u
 // Box to render the mandelbox in
 var size = options.boxSize
 var BOX = [options.boxX, options.boxY, options.boxZ, size];  // [x, y, z, size]
-var STEP = size/options.detail; // how big should one point be
-var BLOCKSIZE = STEP;//STEP*0.1 == trippy
 
 window.setTimeout(function(){
   document.getElementById("caclulating").style.display = 'none';
   document.getElementById("rendering").style.display = 'block';
 
-  var blocks = time(function() { return calculateBlocks(BOX, STEP, BLOCKSIZE, ESCAPE, DEPTH); }, 'calculateBlocks', 1);
+  var blocks = time(function() { return calculateBlocks(BOX, options.detail, ESCAPE, DEPTH, options.itts); }, 'calculateBlocks');
   window.setTimeout(function(){
     document.getElementById("rendering").style.display = 'none';
 
@@ -85,7 +85,8 @@ function rerender(){
     scene.remove(scene.children[0]); 
   }
 
-  scene.add(time(function() { return createMesh(time(function() { return calculateBlocks(BOX, STEP, BLOCKSIZE, ESCAPE, DEPTH); }, 'calculateBlocks', 1))}, 'createMesh'));
+
+  scene.add(time(function() { return createMesh(time(function() { return calculateBlocks(BOX, STEP, BLOCKSIZE, ESCAPE, DEPTH); }, 'calculateBlocks'))}, 'createMesh'));
   render();
 }
 

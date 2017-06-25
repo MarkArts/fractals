@@ -33,15 +33,25 @@ function test(point, escape, depth){
   return false;
 }
 
-// box = [x, y, z, size]
-function calculateBlocks(box, step, blocksize, escape, depth){
+function calculateBlocks(box, detail, escape, depth, itt){
+	if(itt < 0){
+		return [];
+	}
+
+	var scaler=8.5;
 	size = box[3];
+	step = size/detail;
+	console.log(step, MINRADIUS);	
+
 	startx = box[0] - size/2;
 	starty = box[1] - size/2;
 	startz = box[2] - size/2;
 	endx = box[0] + size/2
 	endy = box[1] + size/2
 	endz = box[2] + size/2
+
+	smallerBox = [box[0], box[1], box[2], size/scaler];
+	console.log(box);
 
 	var drop = 0;
 	var blocks = [];
@@ -50,12 +60,20 @@ function calculateBlocks(box, step, blocksize, escape, depth){
 	  for(var y = starty; y <= endy; y+=step){
 	    for(var z = startz; z <= endz; z+=step){
 	      point.set(x,y,z);
+
+     	  if(x > -size/scaler && x < size/scaler &&
+     	  	 y > -size/scaler && y < size/scaler &&
+     	  	 z > -size/scaler && z < size/scaler) continue;
+
 	      if( test(point, escape, depth) ){
-	        blocks.push({x: x, y: y, z: z, vx:point.x,vy:point.y,vz:point.z});
+	        blocks.push({x: x, y: y, z: z, vx:point.x,vy:point.y,vz:point.z, size: step});
 	      }
 	    }
 	  }
 	}
 
-	return blocks;
+	MINRADIUS = MINRADIUS/4
+	RADIUSRATIO = Math.sqrt(FIXEDRADIUS) / Math.sqrt(MINRADIUS);
+
+	return blocks.concat(calculateBlocks(smallerBox, detail, escape*2.1, depth, itt-1));
 }

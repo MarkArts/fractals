@@ -4,7 +4,9 @@ function setOptionsFromHash(options){
 		key=x.split('=')[0];
 		val=x.split('=')[1];
 		if(key in options){
-			options[key] = parseInt(val);
+			console.log(parseFloat(val));
+		
+			options[key] = parseFloat(val);
 		}
 	})
 }
