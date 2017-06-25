@@ -10,3 +10,10 @@ function setOptionsFromHash(options){
 		}
 	})
 }
+
+function url(){
+	return "#"+Object.keys(options).reduce( (acc, k) => {
+		console.log(acc, k)
+   		return k+"="+options[k]+";"+acc;
+	}, "");
+}
