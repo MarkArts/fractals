@@ -23,12 +23,12 @@ var DEPTH = 5; // how many itteratins should we run before givving up
 
 // Box to render the mandelbox in
 var size = 3;
-var BOX = [0, 0, 0, size];  // [x, y, z, size]
-var STEP = size*(1/100); // how big should one point be
+var BOX = [0, 0, 0, 1.5];  // [x, y, z, size]
+var STEP = size*(1/160); // how big should one point be
 var BLOCKSIZE = STEP;//STEP*0.1 == trippy
 
 
-var blocks = time(function() { return calculateBlocks(BOX, STEP, BLOCKSIZE, ESCAPE, DEPTH); }, 'calculateBlocks', 3);
+var blocks = time(function() { return calculateBlocks(BOX, STEP, BLOCKSIZE, ESCAPE, DEPTH); }, 'calculateBlocks', 1);
 var mesh = time(function(){ return createMesh(blocks); }, 'createMesh');
 
 scene.add(mesh);

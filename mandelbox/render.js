@@ -6,65 +6,74 @@ function createMesh(blocks) {
   if(blocks == null) {
     return;
   }
-  
+
+
+  var geometry = new THREE.BufferGeometry();
+  var v = new THREE.BufferAttribute( new Float32Array( blocks.length * 6*6*3), 3 );  
+  var vi = 0;
   for(var i = 0; i < blocks.length; i++) {
       var pos = blocks[i]
-      vertices.push([pos.x+BLOCKSIZE, pos.y+BLOCKSIZE-BLOCKSIZE, pos.z+BLOCKSIZE]);
-      vertices.push([pos.x+BLOCKSIZE-BLOCKSIZE, pos.y+BLOCKSIZE-BLOCKSIZE, pos.z+BLOCKSIZE]);
-      vertices.push([pos.x+BLOCKSIZE-BLOCKSIZE, pos.y+BLOCKSIZE-BLOCKSIZE, pos.z+BLOCKSIZE-BLOCKSIZE]);
-    
-      vertices.push([pos.x+BLOCKSIZE, pos.y+BLOCKSIZE-BLOCKSIZE, pos.z+BLOCKSIZE]);
-      vertices.push([pos.x+BLOCKSIZE-BLOCKSIZE, pos.y+BLOCKSIZE-BLOCKSIZE, pos.z+BLOCKSIZE-BLOCKSIZE]);
-      vertices.push([pos.x+BLOCKSIZE, pos.y+BLOCKSIZE-BLOCKSIZE, pos.z+BLOCKSIZE-BLOCKSIZE]);
-    
-      vertices.push([pos.x+BLOCKSIZE, pos.y+BLOCKSIZE, pos.z+BLOCKSIZE]);
-      vertices.push([pos.x+BLOCKSIZE-BLOCKSIZE, pos.y+BLOCKSIZE, pos.z+BLOCKSIZE-BLOCKSIZE]);
-      vertices.push([pos.x+BLOCKSIZE-BLOCKSIZE, pos.y+BLOCKSIZE, pos.z+BLOCKSIZE]);
-    
-      vertices.push([pos.x+BLOCKSIZE, pos.y+BLOCKSIZE, pos.z+BLOCKSIZE]);
-      vertices.push([pos.x+BLOCKSIZE, pos.y+BLOCKSIZE, pos.z+BLOCKSIZE-BLOCKSIZE]);
-      vertices.push([pos.x+BLOCKSIZE-BLOCKSIZE, pos.y+BLOCKSIZE, pos.z+BLOCKSIZE-BLOCKSIZE]);
 
-      vertices.push([pos.x+BLOCKSIZE, pos.y+BLOCKSIZE, pos.z+BLOCKSIZE]);
-      vertices.push([pos.x+BLOCKSIZE-BLOCKSIZE, pos.y+BLOCKSIZE, pos.z+BLOCKSIZE]);
-      vertices.push([pos.x+BLOCKSIZE, pos.y+BLOCKSIZE-BLOCKSIZE, pos.z+BLOCKSIZE]);
+      var hasbottom = i+1 != blocks.length ? blocks[i+1].x == pos.x+BLOCKSIZE : false;
+
+	    //botom      
+      v.setXYZ(vi, pos.x+BLOCKSIZE, pos.y+BLOCKSIZE-BLOCKSIZE, pos.z+BLOCKSIZE); vi++;
+      v.setXYZ(vi, pos.x+BLOCKSIZE-BLOCKSIZE, pos.y+BLOCKSIZE-BLOCKSIZE, pos.z+BLOCKSIZE); vi++;
+      v.setXYZ(vi, pos.x+BLOCKSIZE-BLOCKSIZE, pos.y+BLOCKSIZE-BLOCKSIZE, pos.z+BLOCKSIZE-BLOCKSIZE); vi++;
     
-      vertices.push([pos.x+BLOCKSIZE-BLOCKSIZE, pos.y+BLOCKSIZE, pos.z+BLOCKSIZE]);
-      vertices.push([pos.x+BLOCKSIZE-BLOCKSIZE, pos.y+BLOCKSIZE-BLOCKSIZE, pos.z+BLOCKSIZE]);
-      vertices.push([pos.x+BLOCKSIZE, pos.y+BLOCKSIZE-BLOCKSIZE, pos.z+BLOCKSIZE]);
+      v.setXYZ(vi, pos.x+BLOCKSIZE, pos.y+BLOCKSIZE-BLOCKSIZE, pos.z+BLOCKSIZE); vi++;
+      v.setXYZ(vi, pos.x+BLOCKSIZE-BLOCKSIZE, pos.y+BLOCKSIZE-BLOCKSIZE, pos.z+BLOCKSIZE-BLOCKSIZE); vi++;
+      v.setXYZ(vi, pos.x+BLOCKSIZE, pos.y+BLOCKSIZE-BLOCKSIZE, pos.z+BLOCKSIZE-BLOCKSIZE); vi++;
     
-      vertices.push([pos.x+BLOCKSIZE, pos.y+BLOCKSIZE, pos.z+BLOCKSIZE-BLOCKSIZE]);
-      vertices.push([pos.x+BLOCKSIZE, pos.y+BLOCKSIZE-BLOCKSIZE, pos.z+BLOCKSIZE-BLOCKSIZE]);
-      vertices.push([pos.x+BLOCKSIZE-BLOCKSIZE, pos.y+BLOCKSIZE-BLOCKSIZE, pos.z+BLOCKSIZE-BLOCKSIZE]);
+      // top
+      v.setXYZ(vi, pos.x+BLOCKSIZE, pos.y+BLOCKSIZE, pos.z+BLOCKSIZE); vi++;
+      v.setXYZ(vi, pos.x+BLOCKSIZE-BLOCKSIZE, pos.y+BLOCKSIZE, pos.z+BLOCKSIZE-BLOCKSIZE); vi++;
+      v.setXYZ(vi, pos.x+BLOCKSIZE-BLOCKSIZE, pos.y+BLOCKSIZE, pos.z+BLOCKSIZE); vi++;
     
-      vertices.push([pos.x+BLOCKSIZE, pos.y+BLOCKSIZE, pos.z+BLOCKSIZE-BLOCKSIZE]);
-      vertices.push([pos.x+BLOCKSIZE-BLOCKSIZE, pos.y+BLOCKSIZE-BLOCKSIZE, pos.z+BLOCKSIZE-BLOCKSIZE]);
-      vertices.push([pos.x+BLOCKSIZE-BLOCKSIZE, pos.y+BLOCKSIZE, pos.z+BLOCKSIZE-BLOCKSIZE]);
+      v.setXYZ(vi, pos.x+BLOCKSIZE, pos.y+BLOCKSIZE, pos.z+BLOCKSIZE); vi++;
+      v.setXYZ(vi, pos.x+BLOCKSIZE, pos.y+BLOCKSIZE, pos.z+BLOCKSIZE-BLOCKSIZE); vi++;
+      v.setXYZ(vi, pos.x+BLOCKSIZE-BLOCKSIZE, pos.y+BLOCKSIZE, pos.z+BLOCKSIZE-BLOCKSIZE); vi++;
+
+      // // front
+      v.setXYZ(vi, pos.x+BLOCKSIZE, pos.y+BLOCKSIZE, pos.z+BLOCKSIZE); vi++;
+      v.setXYZ(vi, pos.x+BLOCKSIZE-BLOCKSIZE, pos.y+BLOCKSIZE, pos.z+BLOCKSIZE); vi++;
+      v.setXYZ(vi, pos.x+BLOCKSIZE, pos.y+BLOCKSIZE-BLOCKSIZE, pos.z+BLOCKSIZE); vi++;
     
-      vertices.push([pos.x+BLOCKSIZE-BLOCKSIZE, pos.y+BLOCKSIZE-BLOCKSIZE, pos.z+BLOCKSIZE-BLOCKSIZE]);
-      vertices.push([pos.x+BLOCKSIZE-BLOCKSIZE, pos.y+BLOCKSIZE-BLOCKSIZE, pos.z+BLOCKSIZE]);
-      vertices.push([pos.x+BLOCKSIZE-BLOCKSIZE, pos.y+BLOCKSIZE, pos.z+BLOCKSIZE]);
+      v.setXYZ(vi, pos.x+BLOCKSIZE-BLOCKSIZE, pos.y+BLOCKSIZE, pos.z+BLOCKSIZE); vi++;
+      v.setXYZ(vi, pos.x+BLOCKSIZE-BLOCKSIZE, pos.y+BLOCKSIZE-BLOCKSIZE, pos.z+BLOCKSIZE); vi++;
+      v.setXYZ(vi, pos.x+BLOCKSIZE, pos.y+BLOCKSIZE-BLOCKSIZE, pos.z+BLOCKSIZE); vi++;
     
-      vertices.push([pos.x+BLOCKSIZE-BLOCKSIZE, pos.y+BLOCKSIZE-BLOCKSIZE, pos.z+BLOCKSIZE-BLOCKSIZE]);
-      vertices.push([pos.x+BLOCKSIZE-BLOCKSIZE, pos.y+BLOCKSIZE, pos.z+BLOCKSIZE]);
-      vertices.push([pos.x+BLOCKSIZE-BLOCKSIZE, pos.y+BLOCKSIZE, pos.z+BLOCKSIZE-BLOCKSIZE]);
+      // // back
+      v.setXYZ(vi, pos.x+BLOCKSIZE, pos.y+BLOCKSIZE, pos.z+BLOCKSIZE-BLOCKSIZE); vi++;
+      v.setXYZ(vi, pos.x+BLOCKSIZE, pos.y+BLOCKSIZE-BLOCKSIZE, pos.z+BLOCKSIZE-BLOCKSIZE); vi++;
+      v.setXYZ(vi, pos.x+BLOCKSIZE-BLOCKSIZE, pos.y+BLOCKSIZE-BLOCKSIZE, pos.z+BLOCKSIZE-BLOCKSIZE); vi++;
     
-      vertices.push([pos.x+BLOCKSIZE, pos.y+BLOCKSIZE-BLOCKSIZE, pos.z+BLOCKSIZE-BLOCKSIZE]);
-      vertices.push([pos.x+BLOCKSIZE, pos.y+BLOCKSIZE, pos.z+BLOCKSIZE]);
-      vertices.push([pos.x+BLOCKSIZE, pos.y+BLOCKSIZE-BLOCKSIZE, pos.z+BLOCKSIZE]);
+      v.setXYZ(vi, pos.x+BLOCKSIZE, pos.y+BLOCKSIZE, pos.z+BLOCKSIZE-BLOCKSIZE); vi++;
+      v.setXYZ(vi, pos.x+BLOCKSIZE-BLOCKSIZE, pos.y+BLOCKSIZE-BLOCKSIZE, pos.z+BLOCKSIZE-BLOCKSIZE); vi++;
+      v.setXYZ(vi, pos.x+BLOCKSIZE-BLOCKSIZE, pos.y+BLOCKSIZE, pos.z+BLOCKSIZE-BLOCKSIZE); vi++;
     
-      vertices.push([pos.x+BLOCKSIZE, pos.y+BLOCKSIZE, pos.z+BLOCKSIZE]);
-      vertices.push([pos.x+BLOCKSIZE, pos.y+BLOCKSIZE-BLOCKSIZE, pos.z+BLOCKSIZE-BLOCKSIZE]);
-      vertices.push([pos.x+BLOCKSIZE, pos.y+BLOCKSIZE, pos.z+BLOCKSIZE-BLOCKSIZE]);
+
+      // // left
+      v.setXYZ(vi, pos.x+BLOCKSIZE-BLOCKSIZE, pos.y+BLOCKSIZE-BLOCKSIZE, pos.z+BLOCKSIZE-BLOCKSIZE); vi++;
+      v.setXYZ(vi, pos.x+BLOCKSIZE-BLOCKSIZE, pos.y+BLOCKSIZE-BLOCKSIZE, pos.z+BLOCKSIZE); vi++;
+      v.setXYZ(vi, pos.x+BLOCKSIZE-BLOCKSIZE, pos.y+BLOCKSIZE, pos.z+BLOCKSIZE); vi++;
+    
+      v.setXYZ(vi, pos.x+BLOCKSIZE-BLOCKSIZE, pos.y+BLOCKSIZE-BLOCKSIZE, pos.z+BLOCKSIZE-BLOCKSIZE); vi++;
+      v.setXYZ(vi, pos.x+BLOCKSIZE-BLOCKSIZE, pos.y+BLOCKSIZE, pos.z+BLOCKSIZE); vi++;
+      v.setXYZ(vi, pos.x+BLOCKSIZE-BLOCKSIZE, pos.y+BLOCKSIZE, pos.z+BLOCKSIZE-BLOCKSIZE); vi++;
+    
+
+      // // right
+      v.setXYZ(vi, pos.x+BLOCKSIZE, pos.y+BLOCKSIZE-BLOCKSIZE, pos.z+BLOCKSIZE-BLOCKSIZE); vi++;
+      v.setXYZ(vi, pos.x+BLOCKSIZE, pos.y+BLOCKSIZE, pos.z+BLOCKSIZE); vi++;
+      v.setXYZ(vi, pos.x+BLOCKSIZE, pos.y+BLOCKSIZE-BLOCKSIZE, pos.z+BLOCKSIZE); vi++;
+    
+      v.setXYZ(vi, pos.x+BLOCKSIZE, pos.y+BLOCKSIZE, pos.z+BLOCKSIZE); vi++;
+      v.setXYZ(vi, pos.x+BLOCKSIZE, pos.y+BLOCKSIZE-BLOCKSIZE, pos.z+BLOCKSIZE-BLOCKSIZE); vi++;
+      v.setXYZ(vi, pos.x+BLOCKSIZE, pos.y+BLOCKSIZE, pos.z+BLOCKSIZE-BLOCKSIZE); vi++;
     
   }
 
-  // Draw chunk
-  var geometry = new THREE.BufferGeometry();
-  var v = new THREE.BufferAttribute( new Float32Array( vertices.length * 3), 3 );
-  for ( var i = 0; i < vertices.length; i++ ) {
-    v.setXYZ(i, vertices[i][0], vertices[i][1], vertices[i][2]);
-  }
   geometry.addAttribute( 'position', v );
   
   // var c = new THREE.BufferAttribute(new Float32Array(blocks.length*36*3), 3 );
