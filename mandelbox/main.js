@@ -1,9 +1,33 @@
+var options = {
+  // parameters of the mandelbox
+  fixedradius: 1,   // no idea
+  minradius: 0.5,  // lowwering this makes the core more detailed
+  scale: -1.25,  // zooms in or out (doesn't scale  the quality settings like depth/escape/detail)
+  escape: 0.2, // how deep should we search the complex
+  depth: 5, // how many itteratins should we run before givving up
+  detail: 300, // this to the power of three are the amount of cubes calculated
+
+  // StartCamera position
+  cameraX: 2,
+  cameraY: 2,
+  cameraZ: 2,
+
+  // The box witch the mandel will be renderred in
+  boxX: 0,
+  boxY: 0,
+  boxZ: 0,
+  boxSize: 10,  
+};
+
+setOptionsFromHash(options);
+
+
 var scene = new THREE.Scene();
 var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
 
-camera.position.x = 2;
-camera.position.y = 2;
-camera.position.z = 2;
+camera.position.x = options.cameraX;
+camera.position.y = options.cameraY;
+camera.position.z = options.cameraZ;
 
 var renderer = new THREE.WebGLRenderer();
 renderer.setSize( window.innerWidth, window.innerHeight );
@@ -11,21 +35,20 @@ document.body.appendChild( renderer.domElement );
 
 var controls = new THREE.OrbitControls( camera, renderer.domElement );
 
-
 // mandelbox constants
-var FIXEDRADIUS = 1;
-var MINRADIUS	= 0.5;
+var FIXEDRADIUS = options.fixedradius;
+var MINRADIUS	= options.minradius;
 var RADIUSRATIO = Math.sqrt(FIXEDRADIUS) / Math.sqrt(MINRADIUS);
 
 //Mandelbox paraneters
-var SCALE = -1.25;
-var ESCAPE = 0.2; // how deep should we search the complex
-var DEPTH = 5; // how many itteratins should we run before givving up
+var SCALE = options.scale;
+var ESCAPE = options.escape; // how deep should we search the complex
+var DEPTH = options.depth; // how many itteratins should we run before givving up
 
 // Box to render the mandelbox in
-var size = 5;
-var BOX = [0, 0, 0, size];  // [x, y, z, size]
-var STEP = size/400; // how big should one point be
+var size = options.boxSize
+var BOX = [options.boxX, options.boxY, options.boxZ, size];  // [x, y, z, size]
+var STEP = size/options.detail; // how big should one point be
 var BLOCKSIZE = STEP;//STEP*0.1 == trippy
 
 window.setTimeout(function(){
