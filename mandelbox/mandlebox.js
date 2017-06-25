@@ -35,12 +35,10 @@ function test(point, escape, depth){
 
 // box = [x, y, z, size]
 function calculateBlocks(box, step, blocksize, escape, depth){
-	var STARTSIZE = blocksize;
 	size = box[3];
 	startx = box[0] - size/2;
 	starty = box[1] - size/2;
 	startz = box[2] - size/2;
-
 	endx = box[0] + size/2
 	endy = box[1] + size/2
 	endz = box[2] + size/2
@@ -48,9 +46,9 @@ function calculateBlocks(box, step, blocksize, escape, depth){
 	var drop = 0;
 	var blocks = [];
 	var point = new THREE.Vector3(0, 0, 0);
-	for(var x = -1.5; x <= 1.5; x+=step){
-	  for(var y = -1.5; y <= 1.5; y+=step){
-	    for(var z = -1.5; z <= 1.5; z+=step){
+	for(var x = startx; x <= endx; x+=step){
+	  for(var y = starty; y <= endy; y+=step){
+	    for(var z = startz; z <= endz; z+=step){
 	      point.set(x,y,z);
 	      if( test(point, escape, depth) ){
 	        blocks.push({x: x, y: y, z: z, vx:point.x,vy:point.y,vz:point.z});
@@ -59,6 +57,5 @@ function calculateBlocks(box, step, blocksize, escape, depth){
 	  }
 	}
 
-	console.log('blocks: '+ blocks.length);
 	return blocks;
 }

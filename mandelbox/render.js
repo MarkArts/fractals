@@ -84,11 +84,13 @@ function createMesh(blocks) {
   //   }
   // }
   //geometry.addAttribute( 'color', c );
-  var material = new THREE.MeshNormalMaterial() //{ vertexColors: THREE.VertexColors });
+  var material = new THREE.MeshPhongMaterial() //{ vertexColors: THREE.VertexColors });
   
   geometry.computeVertexNormals();
   geometry.computeFaceNormals();
   var mesh = new THREE.Mesh( geometry, material);
+  mesh.receiveShadow = true;
+  mesh.castShadow = true;
 
   mesh.position.x = 0;
   mesh.position.y = 0;
