@@ -8,7 +8,7 @@ A Three.js implementation of a mandelbox:
 
 * [Mobile friendly link](http://thomassio.nl/mark/fractals/mandelbox/index.html#detail=50;cameraX=3;cameraY=3;cameraZ=3;boxSize=5)
 * [Not so mobile friendly](http://thomassio.nl/mark/fractals/mandelbox/index.html#detail=100;cameraX=3;cameraY=3;cameraZ=3;boxSize=5;scale=3;escape=3.5)
-* [Very heavy link (beware of it crashen your browser](http://thomassio.nl/mark/fractals/mandelbox/index.html#detail=300;cameraX=3;cameraY=3;cameraZ=3;boxSize=5;scale=3;escape=2)
+* [Very heavy link beware of it crashing your browser](http://thomassio.nl/mark/fractals/mandelbox/index.html#detail=300;cameraX=3;cameraY=3;cameraZ=3;boxSize=5;scale=3;escape=2)
 
 ## Tree
 A fractal based on breaking a straight line in two (creating a tree structure)
