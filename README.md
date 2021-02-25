@@ -6,9 +6,9 @@ A Three.js implementation of a mandelbox:
 
 <img src="https://github.com/MarkArts/fractals/blob/master/mandelbox/screens/1.PNG?raw=true" width="400"> <img src="https://github.com/MarkArts/fractals/blob/master/mandelbox/screens/2.PNG?raw=true" width="400"> <img src="https://github.com/MarkArts/fractals/blob/master/mandelbox/screens/rec2.PNG?raw=true" width="400"> <img src="https://github.com/MarkArts/fractals/blob/master/mandelbox/screens/rec3.PNG?raw=true" width="400">
 
-* [Mobile friendly link](http://thomassio.nl/mark/fractals/mandelbox/index.html#detail=50;cameraX=3;cameraY=3;cameraZ=3;boxSize=5)
-* [Not so mobile friendly](http://thomassio.nl/mark/fractals/mandelbox/index.html#detail=100;cameraX=3;cameraY=3;cameraZ=3;boxSize=5;scale=3;escape=3.5)
-* [Very heavy link beware of it crashing your browser](http://thomassio.nl/mark/fractals/mandelbox/index.html#detail=300;cameraX=3;cameraY=3;cameraZ=3;boxSize=5;scale=3;escape=2)
+* [Mobile friendly link](https://markarts.github.io/fractals/mandelbox/index.html#detail=50;cameraX=3;cameraY=3;cameraZ=3;boxSize=5)
+* [Not so mobile friendly](https://markarts.github.io/fractals/mandelbox/index.html#detail=100;cameraX=3;cameraY=3;cameraZ=3;boxSize=5;scale=3;escape=3.5)
+* [Very heavy link beware of it crashing your browser](https://markarts.github.io/fractals/mandelbox/index.html#detail=300;cameraX=3;cameraY=3;cameraZ=3;boxSize=5;scale=3;escape=2)
 
 You can set the following options in the hash of the url to change the fractal (#option=value;nextoption=value)
 ```javascript
