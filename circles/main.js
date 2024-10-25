@@ -65,7 +65,7 @@ function drawCircles(circles) {
       circles[i][2] / 2,
       0,
       2 * Math.PI,
-      false
+      false,
     );
   }
   context.stroke();
@@ -151,7 +151,7 @@ setInterval(function () {
     circles,
     circleSize / 2,
     circleSize / 2,
-    1 + ((speed * 2) / 1.4125) * dt
+    1 + ((speed * 2) / 1.4125) * dt,
   );
 
   console.log(circles.length);
