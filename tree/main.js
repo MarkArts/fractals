@@ -1,3 +1,6 @@
+import * as THREE from "three";
+import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+
 var scene = new THREE.Scene();
 var camera = new THREE.PerspectiveCamera(
   75,
@@ -12,7 +15,7 @@ var renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
-// var controls = new THREE.OrbitControls(camera, renderer.domElement);
+var controls = new OrbitControls(camera, renderer.domElement);
 
 // smooth my curve over this many points
 var numPoints = 20;
@@ -35,11 +38,7 @@ function createLine(x, y, length, zrad, mirror) {
   var geometry = new THREE.BufferGeometry();
   var splinePoints = spline.getPoints(numPoints);
 
-  for (var i = 0; i < splinePoints.length; i++) {
-    geometry.vertices.push(splinePoints[i]);
-  }
-
-  var line = new THREE.Line(geometry, material);
+  var line = new THREE.Line(geometry.setFromPoints(splinePoints), material);
 
   line.position.x = x;
   line.position.y = y;

@@ -10,10 +10,16 @@
         height: 100%;
       }
     </style>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.153.0/three.min.js"></script>
-    <script src="http://threejs.org/examples/js/controls/OrbitControls.js"></script>
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://unpkg.com/three@0.169.0/build/three.module.js",
+          "three/addons/": "https://unpkg.com/three@0.169.0/examples/jsm/"
+        }
+      }
+    </script>
   </head>
   <body>
-    <script src="main.js"></script>
+    <script type="module" src="main.js"></script>
   </body>
 </html>
