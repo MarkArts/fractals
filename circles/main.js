@@ -38,7 +38,7 @@ function splitCircle(x, y, size) {
   circles.push([x - size / 2, y + size / 2, size / 4]);
   circles.push([x + size / 2, y + size / 2, size / 4]);
   circles.push([x, y, size / 2]);
-  //  circles.push([x, y, size/4]);
+  circles.push([x, y, size / 4]);
 
   return circles;
 }
@@ -115,21 +115,12 @@ function cleanCircles(circles) {
       newCircles.push([circles[i][0], circles[i][1], circles[i][2]]);
     }
   }
-
-  if (newCircles.length >= 10000 || newCircles.length == 0) {
-    return generateCircles();
-  }
-
   return newCircles;
 }
 
 function generateCircles() {
-  var circles = [
-    [circleSize / 2, circleSize / 2, circleSize],
-    //[circleSize*1.5, circleSize/2, circleSize],
-  ];
+  var circles = [[width / 2, height / 2, circleSize]];
 
-  circles = splitCircles(circles);
   circles = splitCircles(circles);
   circles = splitCircles(circles);
   circles = splitCircles(circles);
