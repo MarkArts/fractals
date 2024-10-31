@@ -1,7 +1,6 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 
-var scene = new THREE.Scene();
 var camera = new THREE.PerspectiveCamera(
   75,
   window.innerWidth / window.innerHeight,
@@ -19,13 +18,18 @@ var controls = new OrbitControls(camera, renderer.domElement);
 
 // smooth my curve over this many points
 var numPoints = 20;
+var curvepointDistance = 0.5;
+var splits = 3;
+var rotationY = 45;
+var rotationX = 45;
+var lengthDivision = 1.3;
 
 function createLine(x, y, length, zrad, mirror) {
   var curvePoint = mirror ? length / 8 : -length / 8;
 
   var points = [
     new THREE.Vector3(0, 0, 0),
-    new THREE.Vector3(curvePoint, length * 0.75, 0),
+    new THREE.Vector3(curvePoint, length * curvepointDistance, 0),
     new THREE.Vector3(0, length, 0),
   ];
 
@@ -54,8 +58,6 @@ function createLine(x, y, length, zrad, mirror) {
 function splitLine(line) {
   var lines = [];
 
-  console.log(line.rotation.z * (180 / Math.PI));
-
   var sidea = Math.sin(line.rotation.z) * line.length;
   var sideb = Math.cos(line.rotation.z) * line.length;
 
@@ -66,16 +68,16 @@ function splitLine(line) {
     createLine(
       endX,
       endY,
-      line.length / 1.3,
-      line.rotation.z - 45 * (Math.PI / 180),
+      line.length / lengthDivision,
+      line.rotation.z - rotationY * (Math.PI / 180),
     ),
   );
   lines.push(
     createLine(
       endX,
       endY,
-      line.length / 1.3,
-      line.rotation.z + 45 * (Math.PI / 180),
+      line.length / lengthDivision,
+      line.rotation.z + rotationX * (Math.PI / 180),
     ),
   );
 
@@ -94,10 +96,8 @@ function splitRec(line, times) {
     .concat(splitRec(lines[1], times - 1));
 }
 
-var line = createLine(0, -10, 5, 0, false);
-var lines = splitRec(line, 10);
-
-lines.map((l) => scene.add(l));
+var scene = new THREE.Scene();
+rerender();
 
 var render = function () {
   requestAnimationFrame(render);
@@ -106,5 +106,37 @@ var render = function () {
 };
 
 render();
+
+function rerender() {
+  scene.clear();
+  var line = createLine(0, -10, 5, 0, false);
+  var lines = splitRec(line, splits);
+  lines.map((l) => scene.add(l));
+}
+
+document.querySelector("#splits").addEventListener("input", (e) => {
+  splits = e.target.value;
+  rerender();
+});
+
+document.querySelector("#lengthDivision").addEventListener("input", (e) => {
+  lengthDivision = e.target.value / 100;
+  rerender();
+});
+
+document.querySelector("#curvepointDistance").addEventListener("input", (e) => {
+  curvepointDistance = e.target.value / 100;
+  rerender();
+});
+
+document.querySelector("#rotationX").addEventListener("input", (e) => {
+  rotationX = e.target.value;
+  rerender();
+});
+
+document.querySelector("#rotationY").addEventListener("input", (e) => {
+  rotationY = e.target.value;
+  rerender();
+});
 
 ///
