@@ -292,7 +292,6 @@ function createMesh(THREE, blocks, options) {
     vi++;
   }
 
-  console.log(geometry);
   geometry.setAttribute("position", v);
 
   // var c = new THREE.BufferAttribute(new Float32Array(blocks.length*36*3), 3 );

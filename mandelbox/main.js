@@ -56,7 +56,8 @@ var DEPTH = options.depth; // how many itteratins should we run before givving u
 // Box to render the mandelbox in
 var size = options.boxSize;
 var BOX = [options.boxX, options.boxY, options.boxZ, size]; // [x, y, z, size]
-var STEP = size / options.detail; // how big should one point be
+var DETAIL = options.detail;
+var STEP = size / DETAIL; // how big should one point be
 var BLOCKSIZE = STEP; //STEP*0.1 == trippy
 
 window.setTimeout(function () {
@@ -96,13 +97,9 @@ var render = function () {
 render();
 
 function rerender() {
-  SCALE -= 0.01;
-  DEPTH += 0.02;
   console.log(SCALE);
   console.log(DEPTH);
-  while (scene.children.length > 0) {
-    scene.remove(scene.children[0]);
-  }
+  scene.clear();
 
   scene.add(
     time(function () {
@@ -125,18 +122,65 @@ function rerender() {
     }, "createMesh"),
   );
   render();
+
+  updateUrl();
 }
 
-//window.setInterval(rerender, 400)
+document.querySelector("#SCALE").setAttribute("value", SCALE * 100);
+document.querySelector("#SCALE").addEventListener("input", (e) => {
+  SCALE = e.target.value / 100;
+  rerender();
+});
 
-// render code
+document.querySelector("#DEPTH").setAttribute("value", DEPTH);
+document.querySelector("#DEPTH").addEventListener("input", (e) => {
+  DEPTH = e.target.value;
+  rerender();
+});
 
-///// controls
-// var slider = document.getElementById("slider");
-// slider.value = SCALE;
-// slider.addEventListener("input", setSliderScale);
-// SLIDERSCALE = 0;
-// function setSliderScale(e){
-// 	var target = (e.target) ? e.target : e.srcElement;
-// 	SLIDERSCALE = target.value;
-// }
+document.querySelector("#boxSize").setAttribute("value", size);
+document.querySelector("#boxSize").addEventListener("input", (e) => {
+  size = e.target.value;
+
+  BOX = [options.boxX, options.boxY, options.boxZ, size]; // [x, y, z, size]
+  STEP = size / DETAIL; // how big should one point be
+  BLOCKSIZE = STEP; //STEP*0.1 == trippy
+  rerender();
+});
+
+document.querySelector("#DETAIL").setAttribute("value", DETAIL);
+document.querySelector("#DETAIL").addEventListener("input", (e) => {
+  DETAIL = e.target.value;
+
+  BOX = [options.boxX, options.boxY, options.boxZ, size]; // [x, y, z, size]
+  STEP = size / DETAIL; // how big should one point be
+  BLOCKSIZE = STEP; //STEP*0.1 == trippy
+  rerender();
+});
+
+document.querySelector("#MINRADIUS").setAttribute("value", MINRADIUS * 100);
+document.querySelector("#MINRADIUS").addEventListener("input", (e) => {
+  MINRADIUS = e.target.value / 100;
+  RADIUSRATIO = Math.sqrt(FIXEDRADIUS) / Math.sqrt(MINRADIUS);
+  rerender();
+});
+
+function updateUrl() {
+  options.scale = SCALE;
+  options.depth = DEPTH;
+  options.boxSize = size;
+  options.detail = DETAIL;
+  options.minradius = MINRADIUS;
+
+  options.cameraX = camera.position.x;
+  options.cameraY = camera.position.y;
+  options.cameraZ = camera.position.z;
+
+  window.location.hash = "#" + url();
+}
+
+function url() {
+  return Object.keys(options).reduce((acc, k) => {
+    return k + "=" + options[k] + ";" + acc;
+  }, "");
+}

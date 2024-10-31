@@ -8,27 +8,3 @@ function setOptionsFromHash(options) {
     }
   });
 }
-
-function url() {
-  return (
-    "#" +
-    Object.keys(options).reduce((acc, k) => {
-      return k + "=" + options[k] + ";" + acc;
-    }, "")
-  );
-}
-
-function cameraHash() {
-  return (
-    "#" +
-    "cameraX=" +
-    camera.position.x +
-    ";" +
-    "cameraY=" +
-    camera.position.y +
-    ";" +
-    "cameraZ=" +
-    camera.position.z +
-    ";"
-  );
-}
