@@ -42,9 +42,9 @@ You can set the following options in the hash of the url to change the fractal (
 ## Tree
 
 A fractal based on breaking a straight line in two (creating a tree structure)
-[Try it here](http://thomassio.nl/mark/fractals/tree/)
+[Try it here](https://markarts.github.io/fractals/tree)
 
 ## Circles
 
 Very basic fractal demo with circles breaking into smaller ones
-[Try it here](http://thomassio.nl/mark/fractals/circles/)
+[Try it here](https://markarts.github.io/fractals/circles)
