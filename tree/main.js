@@ -23,6 +23,7 @@ var splits = 3;
 var rotationY = 45;
 var rotationX = 45;
 var lengthDivision = 1.3;
+var random = 100;
 
 function createLine(x, y, length, zrad, mirror) {
   var curvePoint = mirror ? length / 8 : -length / 8;
@@ -68,7 +69,7 @@ function splitLine(line) {
     createLine(
       endX,
       endY,
-      line.length / lengthDivision,
+      line.length / lengthDivision + (0.5 - Math.random()) / random,
       line.rotation.z - rotationY * (Math.PI / 180),
     ),
   );
@@ -76,7 +77,7 @@ function splitLine(line) {
     createLine(
       endX,
       endY,
-      line.length / lengthDivision,
+      line.length / lengthDivision + (0.5 - Math.random()) / random,
       line.rotation.z + rotationX * (Math.PI / 180),
     ),
   );
@@ -136,6 +137,11 @@ document.querySelector("#rotationX").addEventListener("input", (e) => {
 
 document.querySelector("#rotationY").addEventListener("input", (e) => {
   rotationY = e.target.value;
+  rerender();
+});
+
+document.querySelector("#random").addEventListener("input", (e) => {
+  random = e.target.value;
   rerender();
 });
 
