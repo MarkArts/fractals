@@ -1,4 +1,4 @@
-function createMesh(blocks) {
+function createMesh(THREE, blocks, options) {
   var vertices = [];
   var colors = [];
   this.blockSize = 1;
@@ -17,255 +17,283 @@ function createMesh(blocks) {
     var pos = blocks[i];
 
     var hasbottom =
-      i + 1 != blocks.length ? blocks[i + 1].x == pos.x + BLOCKSIZE : false;
+      i + 1 != blocks.length
+        ? blocks[i + 1].x == pos.x + options.BLOCKSIZE
+        : false;
 
     //botom
     v.setXYZ(
       vi,
-      pos.x + BLOCKSIZE,
-      pos.y + BLOCKSIZE - BLOCKSIZE,
-      pos.z + BLOCKSIZE,
+      pos.x + options.BLOCKSIZE,
+      pos.y + options.BLOCKSIZE - options.BLOCKSIZE,
+      pos.z + options.BLOCKSIZE,
     );
     vi++;
     v.setXYZ(
       vi,
-      pos.x + BLOCKSIZE - BLOCKSIZE,
-      pos.y + BLOCKSIZE - BLOCKSIZE,
-      pos.z + BLOCKSIZE,
+      pos.x + options.BLOCKSIZE - options.BLOCKSIZE,
+      pos.y + options.BLOCKSIZE - options.BLOCKSIZE,
+      pos.z + options.BLOCKSIZE,
     );
     vi++;
     v.setXYZ(
       vi,
-      pos.x + BLOCKSIZE - BLOCKSIZE,
-      pos.y + BLOCKSIZE - BLOCKSIZE,
-      pos.z + BLOCKSIZE - BLOCKSIZE,
+      pos.x + options.BLOCKSIZE - options.BLOCKSIZE,
+      pos.y + options.BLOCKSIZE - options.BLOCKSIZE,
+      pos.z + options.BLOCKSIZE - options.BLOCKSIZE,
     );
     vi++;
 
     v.setXYZ(
       vi,
-      pos.x + BLOCKSIZE,
-      pos.y + BLOCKSIZE - BLOCKSIZE,
-      pos.z + BLOCKSIZE,
+      pos.x + options.BLOCKSIZE,
+      pos.y + options.BLOCKSIZE - options.BLOCKSIZE,
+      pos.z + options.BLOCKSIZE,
     );
     vi++;
     v.setXYZ(
       vi,
-      pos.x + BLOCKSIZE - BLOCKSIZE,
-      pos.y + BLOCKSIZE - BLOCKSIZE,
-      pos.z + BLOCKSIZE - BLOCKSIZE,
+      pos.x + options.BLOCKSIZE - options.BLOCKSIZE,
+      pos.y + options.BLOCKSIZE - options.BLOCKSIZE,
+      pos.z + options.BLOCKSIZE - options.BLOCKSIZE,
     );
     vi++;
     v.setXYZ(
       vi,
-      pos.x + BLOCKSIZE,
-      pos.y + BLOCKSIZE - BLOCKSIZE,
-      pos.z + BLOCKSIZE - BLOCKSIZE,
+      pos.x + options.BLOCKSIZE,
+      pos.y + options.BLOCKSIZE - options.BLOCKSIZE,
+      pos.z + options.BLOCKSIZE - options.BLOCKSIZE,
     );
     vi++;
 
     // top
-    v.setXYZ(vi, pos.x + BLOCKSIZE, pos.y + BLOCKSIZE, pos.z + BLOCKSIZE);
-    vi++;
     v.setXYZ(
       vi,
-      pos.x + BLOCKSIZE - BLOCKSIZE,
-      pos.y + BLOCKSIZE,
-      pos.z + BLOCKSIZE - BLOCKSIZE,
+      pos.x + options.BLOCKSIZE,
+      pos.y + options.BLOCKSIZE,
+      pos.z + options.BLOCKSIZE,
     );
     vi++;
     v.setXYZ(
       vi,
-      pos.x + BLOCKSIZE - BLOCKSIZE,
-      pos.y + BLOCKSIZE,
-      pos.z + BLOCKSIZE,
+      pos.x + options.BLOCKSIZE - options.BLOCKSIZE,
+      pos.y + options.BLOCKSIZE,
+      pos.z + options.BLOCKSIZE - options.BLOCKSIZE,
+    );
+    vi++;
+    v.setXYZ(
+      vi,
+      pos.x + options.BLOCKSIZE - options.BLOCKSIZE,
+      pos.y + options.BLOCKSIZE,
+      pos.z + options.BLOCKSIZE,
     );
     vi++;
 
-    v.setXYZ(vi, pos.x + BLOCKSIZE, pos.y + BLOCKSIZE, pos.z + BLOCKSIZE);
-    vi++;
     v.setXYZ(
       vi,
-      pos.x + BLOCKSIZE,
-      pos.y + BLOCKSIZE,
-      pos.z + BLOCKSIZE - BLOCKSIZE,
+      pos.x + options.BLOCKSIZE,
+      pos.y + options.BLOCKSIZE,
+      pos.z + options.BLOCKSIZE,
     );
     vi++;
     v.setXYZ(
       vi,
-      pos.x + BLOCKSIZE - BLOCKSIZE,
-      pos.y + BLOCKSIZE,
-      pos.z + BLOCKSIZE - BLOCKSIZE,
+      pos.x + options.BLOCKSIZE,
+      pos.y + options.BLOCKSIZE,
+      pos.z + options.BLOCKSIZE - options.BLOCKSIZE,
+    );
+    vi++;
+    v.setXYZ(
+      vi,
+      pos.x + options.BLOCKSIZE - options.BLOCKSIZE,
+      pos.y + options.BLOCKSIZE,
+      pos.z + options.BLOCKSIZE - options.BLOCKSIZE,
     );
     vi++;
 
     // // front
-    v.setXYZ(vi, pos.x + BLOCKSIZE, pos.y + BLOCKSIZE, pos.z + BLOCKSIZE);
-    vi++;
     v.setXYZ(
       vi,
-      pos.x + BLOCKSIZE - BLOCKSIZE,
-      pos.y + BLOCKSIZE,
-      pos.z + BLOCKSIZE,
+      pos.x + options.BLOCKSIZE,
+      pos.y + options.BLOCKSIZE,
+      pos.z + options.BLOCKSIZE,
     );
     vi++;
     v.setXYZ(
       vi,
-      pos.x + BLOCKSIZE,
-      pos.y + BLOCKSIZE - BLOCKSIZE,
-      pos.z + BLOCKSIZE,
+      pos.x + options.BLOCKSIZE - options.BLOCKSIZE,
+      pos.y + options.BLOCKSIZE,
+      pos.z + options.BLOCKSIZE,
+    );
+    vi++;
+    v.setXYZ(
+      vi,
+      pos.x + options.BLOCKSIZE,
+      pos.y + options.BLOCKSIZE - options.BLOCKSIZE,
+      pos.z + options.BLOCKSIZE,
     );
     vi++;
 
     v.setXYZ(
       vi,
-      pos.x + BLOCKSIZE - BLOCKSIZE,
-      pos.y + BLOCKSIZE,
-      pos.z + BLOCKSIZE,
+      pos.x + options.BLOCKSIZE - options.BLOCKSIZE,
+      pos.y + options.BLOCKSIZE,
+      pos.z + options.BLOCKSIZE,
     );
     vi++;
     v.setXYZ(
       vi,
-      pos.x + BLOCKSIZE - BLOCKSIZE,
-      pos.y + BLOCKSIZE - BLOCKSIZE,
-      pos.z + BLOCKSIZE,
+      pos.x + options.BLOCKSIZE - options.BLOCKSIZE,
+      pos.y + options.BLOCKSIZE - options.BLOCKSIZE,
+      pos.z + options.BLOCKSIZE,
     );
     vi++;
     v.setXYZ(
       vi,
-      pos.x + BLOCKSIZE,
-      pos.y + BLOCKSIZE - BLOCKSIZE,
-      pos.z + BLOCKSIZE,
+      pos.x + options.BLOCKSIZE,
+      pos.y + options.BLOCKSIZE - options.BLOCKSIZE,
+      pos.z + options.BLOCKSIZE,
     );
     vi++;
 
     // // back
     v.setXYZ(
       vi,
-      pos.x + BLOCKSIZE,
-      pos.y + BLOCKSIZE,
-      pos.z + BLOCKSIZE - BLOCKSIZE,
+      pos.x + options.BLOCKSIZE,
+      pos.y + options.BLOCKSIZE,
+      pos.z + options.BLOCKSIZE - options.BLOCKSIZE,
     );
     vi++;
     v.setXYZ(
       vi,
-      pos.x + BLOCKSIZE,
-      pos.y + BLOCKSIZE - BLOCKSIZE,
-      pos.z + BLOCKSIZE - BLOCKSIZE,
+      pos.x + options.BLOCKSIZE,
+      pos.y + options.BLOCKSIZE - options.BLOCKSIZE,
+      pos.z + options.BLOCKSIZE - options.BLOCKSIZE,
     );
     vi++;
     v.setXYZ(
       vi,
-      pos.x + BLOCKSIZE - BLOCKSIZE,
-      pos.y + BLOCKSIZE - BLOCKSIZE,
-      pos.z + BLOCKSIZE - BLOCKSIZE,
+      pos.x + options.BLOCKSIZE - options.BLOCKSIZE,
+      pos.y + options.BLOCKSIZE - options.BLOCKSIZE,
+      pos.z + options.BLOCKSIZE - options.BLOCKSIZE,
     );
     vi++;
 
     v.setXYZ(
       vi,
-      pos.x + BLOCKSIZE,
-      pos.y + BLOCKSIZE,
-      pos.z + BLOCKSIZE - BLOCKSIZE,
+      pos.x + options.BLOCKSIZE,
+      pos.y + options.BLOCKSIZE,
+      pos.z + options.BLOCKSIZE - options.BLOCKSIZE,
     );
     vi++;
     v.setXYZ(
       vi,
-      pos.x + BLOCKSIZE - BLOCKSIZE,
-      pos.y + BLOCKSIZE - BLOCKSIZE,
-      pos.z + BLOCKSIZE - BLOCKSIZE,
+      pos.x + options.BLOCKSIZE - options.BLOCKSIZE,
+      pos.y + options.BLOCKSIZE - options.BLOCKSIZE,
+      pos.z + options.BLOCKSIZE - options.BLOCKSIZE,
     );
     vi++;
     v.setXYZ(
       vi,
-      pos.x + BLOCKSIZE - BLOCKSIZE,
-      pos.y + BLOCKSIZE,
-      pos.z + BLOCKSIZE - BLOCKSIZE,
+      pos.x + options.BLOCKSIZE - options.BLOCKSIZE,
+      pos.y + options.BLOCKSIZE,
+      pos.z + options.BLOCKSIZE - options.BLOCKSIZE,
     );
     vi++;
 
     // // left
     v.setXYZ(
       vi,
-      pos.x + BLOCKSIZE - BLOCKSIZE,
-      pos.y + BLOCKSIZE - BLOCKSIZE,
-      pos.z + BLOCKSIZE - BLOCKSIZE,
+      pos.x + options.BLOCKSIZE - options.BLOCKSIZE,
+      pos.y + options.BLOCKSIZE - options.BLOCKSIZE,
+      pos.z + options.BLOCKSIZE - options.BLOCKSIZE,
     );
     vi++;
     v.setXYZ(
       vi,
-      pos.x + BLOCKSIZE - BLOCKSIZE,
-      pos.y + BLOCKSIZE - BLOCKSIZE,
-      pos.z + BLOCKSIZE,
+      pos.x + options.BLOCKSIZE - options.BLOCKSIZE,
+      pos.y + options.BLOCKSIZE - options.BLOCKSIZE,
+      pos.z + options.BLOCKSIZE,
     );
     vi++;
     v.setXYZ(
       vi,
-      pos.x + BLOCKSIZE - BLOCKSIZE,
-      pos.y + BLOCKSIZE,
-      pos.z + BLOCKSIZE,
+      pos.x + options.BLOCKSIZE - options.BLOCKSIZE,
+      pos.y + options.BLOCKSIZE,
+      pos.z + options.BLOCKSIZE,
     );
     vi++;
 
     v.setXYZ(
       vi,
-      pos.x + BLOCKSIZE - BLOCKSIZE,
-      pos.y + BLOCKSIZE - BLOCKSIZE,
-      pos.z + BLOCKSIZE - BLOCKSIZE,
+      pos.x + options.BLOCKSIZE - options.BLOCKSIZE,
+      pos.y + options.BLOCKSIZE - options.BLOCKSIZE,
+      pos.z + options.BLOCKSIZE - options.BLOCKSIZE,
     );
     vi++;
     v.setXYZ(
       vi,
-      pos.x + BLOCKSIZE - BLOCKSIZE,
-      pos.y + BLOCKSIZE,
-      pos.z + BLOCKSIZE,
+      pos.x + options.BLOCKSIZE - options.BLOCKSIZE,
+      pos.y + options.BLOCKSIZE,
+      pos.z + options.BLOCKSIZE,
     );
     vi++;
     v.setXYZ(
       vi,
-      pos.x + BLOCKSIZE - BLOCKSIZE,
-      pos.y + BLOCKSIZE,
-      pos.z + BLOCKSIZE - BLOCKSIZE,
+      pos.x + options.BLOCKSIZE - options.BLOCKSIZE,
+      pos.y + options.BLOCKSIZE,
+      pos.z + options.BLOCKSIZE - options.BLOCKSIZE,
     );
     vi++;
 
     // // right
     v.setXYZ(
       vi,
-      pos.x + BLOCKSIZE,
-      pos.y + BLOCKSIZE - BLOCKSIZE,
-      pos.z + BLOCKSIZE - BLOCKSIZE,
+      pos.x + options.BLOCKSIZE,
+      pos.y + options.BLOCKSIZE - options.BLOCKSIZE,
+      pos.z + options.BLOCKSIZE - options.BLOCKSIZE,
     );
-    vi++;
-    v.setXYZ(vi, pos.x + BLOCKSIZE, pos.y + BLOCKSIZE, pos.z + BLOCKSIZE);
     vi++;
     v.setXYZ(
       vi,
-      pos.x + BLOCKSIZE,
-      pos.y + BLOCKSIZE - BLOCKSIZE,
-      pos.z + BLOCKSIZE,
+      pos.x + options.BLOCKSIZE,
+      pos.y + options.BLOCKSIZE,
+      pos.z + options.BLOCKSIZE,
+    );
+    vi++;
+    v.setXYZ(
+      vi,
+      pos.x + options.BLOCKSIZE,
+      pos.y + options.BLOCKSIZE - options.BLOCKSIZE,
+      pos.z + options.BLOCKSIZE,
     );
     vi++;
 
-    v.setXYZ(vi, pos.x + BLOCKSIZE, pos.y + BLOCKSIZE, pos.z + BLOCKSIZE);
-    vi++;
     v.setXYZ(
       vi,
-      pos.x + BLOCKSIZE,
-      pos.y + BLOCKSIZE - BLOCKSIZE,
-      pos.z + BLOCKSIZE - BLOCKSIZE,
+      pos.x + options.BLOCKSIZE,
+      pos.y + options.BLOCKSIZE,
+      pos.z + options.BLOCKSIZE,
     );
     vi++;
     v.setXYZ(
       vi,
-      pos.x + BLOCKSIZE,
-      pos.y + BLOCKSIZE,
-      pos.z + BLOCKSIZE - BLOCKSIZE,
+      pos.x + options.BLOCKSIZE,
+      pos.y + options.BLOCKSIZE - options.BLOCKSIZE,
+      pos.z + options.BLOCKSIZE - options.BLOCKSIZE,
+    );
+    vi++;
+    v.setXYZ(
+      vi,
+      pos.x + options.BLOCKSIZE,
+      pos.y + options.BLOCKSIZE,
+      pos.z + options.BLOCKSIZE - options.BLOCKSIZE,
     );
     vi++;
   }
 
-  geometry.addAttribute("position", v);
+  console.log(geometry);
+  geometry.setAttribute("position", v);
 
   // var c = new THREE.BufferAttribute(new Float32Array(blocks.length*36*3), 3 );
   // for ( var i = 0; i < blocks.length; i++ ) {
@@ -278,7 +306,7 @@ function createMesh(blocks) {
   var material = new THREE.MeshNormalMaterial(); //{ vertexColors: THREE.VertexColors });
 
   geometry.computeVertexNormals();
-  geometry.computeFaceNormals();
+  // geometry.computeFaceNormals();
   var mesh = new THREE.Mesh(geometry, material);
 
   mesh.position.x = 0;

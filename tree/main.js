@@ -12,7 +12,7 @@ var renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
-var controls = new THREE.OrbitControls(camera, renderer.domElement);
+// var controls = new THREE.OrbitControls(camera, renderer.domElement);
 
 // smooth my curve over this many points
 var numPoints = 20;
@@ -26,13 +26,13 @@ function createLine(x, y, length, zrad, mirror) {
     new THREE.Vector3(0, length, 0),
   ];
 
-  var spline = new THREE.SplineCurve3(points);
+  var spline = new THREE.SplineCurve(points);
 
   var material = new THREE.LineBasicMaterial({
     color: 0xff00f0,
   });
 
-  var geometry = new THREE.Geometry();
+  var geometry = new THREE.BufferGeometry();
   var splinePoints = spline.getPoints(numPoints);
 
   for (var i = 0; i < splinePoints.length; i++) {

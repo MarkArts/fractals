@@ -1,4 +1,4 @@
-function iterate(vector) {
+function iterate(vector, options) {
   if (vector.x > 1) {
     vector.x = 2 - vector.x;
   } else if (vector.x < -1) {
@@ -16,20 +16,20 @@ function iterate(vector) {
   }
 
   var len = vector.length();
-  if (len < MINRADIUS) {
-    vector.multiplyScalar(RADIUSRATIO);
-  } else if (len < FIXEDRADIUS) {
-    vector.addScalar(Math.sqrt(FIXEDRADIUS) / Math.sqrt(len));
+  if (len < options.MINRADIUS) {
+    vector.multiplyScalar(options.RADIUSRATIO);
+  } else if (len < options.FIXEDRADIUS) {
+    vector.addScalar(Math.sqrt(options.FIXEDRADIUS) / Math.sqrt(len));
   }
-  vector.multiplyScalar(SCALE);
+  vector.multiplyScalar(options.SCALE);
 }
 
-function test(point, escape, depth) {
+function test(point, escape, depth, options) {
   var px = point.x;
   var py = point.y;
   var pz = point.z;
   for (var x = depth; x > 0; x--) {
-    iterate(point);
+    iterate(point, options);
 
     point.x = point.x + px;
     point.y = point.y + py;
@@ -43,7 +43,7 @@ function test(point, escape, depth) {
 }
 
 // box = [x, y, z, size]
-function calculateBlocks(box, step, blocksize, escape, depth) {
+function calculateBlocks(THREE, box, step, blocksize, escape, depth, options) {
   size = box[3];
   startx = box[0] - size / 2;
   starty = box[1] - size / 2;
@@ -59,7 +59,7 @@ function calculateBlocks(box, step, blocksize, escape, depth) {
     for (var y = starty; y <= endy; y += step) {
       for (var z = startz; z <= endz; z += step) {
         point.set(x, y, z);
-        if (test(point, escape, depth)) {
+        if (test(point, escape, depth, options)) {
           blocks.push({
             x: x,
             y: y,

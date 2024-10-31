@@ -1,3 +1,6 @@
+import * as THREE from "three";
+import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+
 var options = {
   // parameters of the mandelbox
   fixedradius: 1, // no idea
@@ -36,7 +39,7 @@ camera.position.y = options.cameraY;
 camera.position.z = options.cameraZ;
 
 var renderer = new THREE.WebGLRenderer();
-var controls = new THREE.OrbitControls(camera, renderer.domElement);
+var controls = new OrbitControls(camera, renderer.domElement);
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
@@ -62,7 +65,12 @@ window.setTimeout(function () {
 
   var blocks = time(
     function () {
-      return calculateBlocks(BOX, STEP, BLOCKSIZE, ESCAPE, DEPTH);
+      return calculateBlocks(THREE, BOX, STEP, BLOCKSIZE, ESCAPE, DEPTH, {
+        MINRADIUS,
+        RADIUSRATIO,
+        FIXEDRADIUS,
+        SCALE,
+      });
     },
     "calculateBlocks",
     1,
@@ -71,7 +79,7 @@ window.setTimeout(function () {
     document.getElementById("rendering").style.display = "none";
 
     var mesh = time(function () {
-      return createMesh(blocks);
+      return createMesh(THREE, blocks, { BLOCKSIZE });
     }, "createMesh");
 
     scene.add(mesh);
@@ -99,13 +107,20 @@ function rerender() {
   scene.add(
     time(function () {
       return createMesh(
+        THREE,
         time(
           function () {
-            return calculateBlocks(BOX, STEP, BLOCKSIZE, ESCAPE, DEPTH);
+            return calculateBlocks(THREE, BOX, STEP, BLOCKSIZE, ESCAPE, DEPTH, {
+              MINRADIUS,
+              RADIUSRATIO,
+              FIXEDRADIUS,
+              SCALE,
+            });
           },
           "calculateBlocks",
           1,
         ),
+        { BLOCKSIZE },
       );
     }, "createMesh"),
   );
